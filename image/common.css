@@ -107,7 +107,9 @@ body {
 }
 
 .q-title {
-  width: 1.75rem;
+  display: inline-block;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
   height: 0.72rem;
   line-height: 0.72rem;
   background: rgba(255, 255, 255, 0.1);
@@ -250,11 +252,11 @@ body {
   padding-top: 0.2rem;
 }
 .text-item .btn {
-  padding: 0rem 0.25rem;
+  padding: 0rem 0.2rem;
   float: left;
   margin-bottom: 0.32rem;
-  margin-left: 0.29rem;
-  margin-right: 0.29rem;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
   color: #1b1f26;
   height: 0.63rem;
   line-height: 0.63rem;
@@ -314,10 +316,22 @@ body {
 .r-score {
   color: white;
   text-align: bottom;
-  font-size: 0.36rem;
+  font-size: 0.32rem;
 }
 .r-score .b {
-  font-size: 1rem;
+  font-size: 0.64rem;
+}
+.r-score .gs {
+  margin-left: 0.15rem;
+}
+
+.r-line {
+  margin: 0.22rem 0.38rem 0.15rem;
+  line-height: 0;
+  font-size: 0;
+}
+.r-line img {
+  width: 100%;
 }
 
 .r-txt {
@@ -325,7 +339,6 @@ body {
   font-weight: 400;
   color: #feffff;
   line-height: 0.33rem;
-  margin-top: 0.6rem;
   margin-bottom: 0.49rem;
   padding: 0 0.36rem 0 0.36rem;
 }

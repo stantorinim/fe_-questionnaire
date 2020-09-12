@@ -13,6 +13,7 @@
   <body>
     <div class="r-content" style="background: #f1f1f5; height: 100%">
       <div class="r-title">《孩子学习动力评估量表》测试结果</div>
+
       <div class="r-frm">
         <div class="r-h">
           <div class="r-avatar">
@@ -22,7 +23,12 @@
           <div class="r-score">
             <span class="b">80</span>
             <span>分</span>
+            <span class="r-gs">继续改善</span>
           </div>
+        </div>
+        <!---->
+        <div class="r-line">
+          <img src="./image/line.png" />
         </div>
         <!-- -->
         <div class="r-txt">
@@ -32,7 +38,7 @@
         <!-- ---->
         <div class="r-w">
           <div class="rw-t">
-            获取深度解读<span class="rw-g">请假老师微信</span>
+            获取深度解读<span class="rw-g">请加老师微信</span>
           </div>
           <div class="r-qr">
             <img src="./image/qr.png" />
@@ -51,6 +57,9 @@
     <script>
       $(".r-share").click(() => {
         $("#mask").show();
+      });
+      $("#mask").click(() => {
+        $("#mask").hide();
       });
     </script>
   </body>
