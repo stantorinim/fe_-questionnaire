@@ -6,6 +6,36 @@
 	"subjects": [
 		{
 			"answers": [
+				"题目一答案"
+			],
+			"isNecessary": 1,
+			"items": [],
+			"subjectGroup": "未命名分组",
+			"subjectId": 1,
+			"subjectName": "填写你的手机号",
+			"subjectNum": 1,
+			"subjectScore": 5,
+			"subjectTips": "答题提示xxx",
+			"type": 1,
+			"type_desc": "11位手机号"
+		},
+		{
+			"answers": [
+				"题目二答案"
+			],
+			"isNecessary": 1,
+			"items": [],
+			"subjectGroup": "未命名分组",
+			"subjectId": 2,
+			"subjectName": "请填写一串数字",
+			"subjectNum": 2,
+			"subjectScore": 6,
+			"subjectTips": "答题提示xxx",
+			"type": 2,
+			"type_desc": "只能输入数字"
+		},
+		{
+			"answers": [
 				"男"
 			],
 			"isNecessary": 1,
@@ -48,31 +78,13 @@
 			"isNecessary": 1,
 			"items": [],
 			"subjectGroup": "未命名分组",
-			"subjectId": 6,
-			"subjectName": "下面应该是个文本块",
-			"subjectNum": 6,
-			"subjectScore": 2,
+			"subjectId": 5,
+			"subjectName": "请写下你做题的心情",
+			"subjectNum": 5,
+			"subjectScore": 1,
 			"subjectTips": "答题提示xxx",
-			"type": 6,
-			"type_desc": "文本块"
-		},
-		{
-			"answers": [],
-			"isNecessary": 1,
-			"items": [
-				"标签一",
-				"标签2",
-				"标签3",
-				"标签4"
-			],
-			"subjectGroup": "未命名分组",
-			"subjectId": 7,
-			"subjectName": "这应该是个标签组",
-			"subjectNum": 7,
-			"subjectScore": 3,
-			"subjectTips": "答题提示xxx",
-			"type": 7,
-			"type_desc": "标签组"
+			"type": 5,
+			"type_desc": "单行文本框"
 		},
 		{
 			"answers": [],
@@ -104,6 +116,19 @@
 			"subjectTips": "答题提示xxx",
 			"type": 7,
 			"type_desc": "标签组"
+		},
+		{
+			"answers": [],
+			"isNecessary": 1,
+			"items": [],
+			"subjectGroup": "未命名分组",
+			"subjectId": 8,
+			"subjectName": "这个应该是个数字文本块",
+			"subjectNum": 8,
+			"subjectScore": 4,
+			"subjectTips": "答题提示xxx",
+			"type": 2,
+			"type_desc": "只能输入数字"
 		}
 	],
 	"totalScore": 100
