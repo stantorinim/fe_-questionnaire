@@ -113,7 +113,7 @@ body {
   height: 0.72rem;
   line-height: 0.72rem;
   background: rgba(255, 255, 255, 0.1);
-  border: 2px solid #ffffff;
+  border: 1px solid #ffffff;
   border-radius: 0.12rem;
   font-size: 0.28rem;
   font-weight: 400;
@@ -203,6 +203,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-top:0.22rem;
 }
 .sel-item img {
   width: 0.48rem;
