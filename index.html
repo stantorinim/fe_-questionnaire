@@ -1,273 +1,273 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"
-      name="viewport"
-    />
-    <link rel="stylesheet" type="text/css" href="./image/common.css" />
-    <script src="./js/jq.js"></script>
-    <script src="./js/q2.js"></script>
-    <script>
-      const acurremt = 0; // 后端输入
-    </script>
-  </head>
-  <body>
-    <div class="container" id="home">
-      <div class="home-b1">问卷</div>
-      <div class="h-title">孩子学习动力评估量表测评</div>
-      <div class="h-t1">共10题</div>
-      <div class="h-t2">
-        简介简介简介简介简介简介简介简介简介简介简介简介简介
-        简介简介，感谢您的支持
-      </div>
-      <div class="h-avatar">
-        <img src="./image/sel.png" />
-        <span>微信昵称 </span>
-      </div>
-      <div class="h-start">
-        <div id="go-start" class="button">开始测试</div>
-      </div>
-      <div class="h-logo">
-        <img src="./image/htxt.png" />
+
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+  <link rel="stylesheet" type="text/css" href="./image/common.css" />
+  <script src="./js/jq.js"></script>
+  <script src="./js/q2.js"></script>
+  <script>
+    const acurremt = 0; // 后端输入
+  </script>
+</head>
+
+<body>
+  <div class="container" id="home">
+    <div class="home-b1">问卷</div>
+    <div class="h-title">孩子学习动力评估量表测评</div>
+    <div class="h-t1">共10题</div>
+    <div class="h-t2">
+      简介简介简介简介简介简介简介简介简介简介简介简介简介
+      简介简介，感谢您的支持
+    </div>
+    <div class="h-avatar">
+      <img
+        src="http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEJwolWqCg30KbrYfiaic1ky1LiavZOxI2Hle1R4OumUcsGYWyTqF9BrYGOvfHFNhqnrDib4jZMxalFSCw/132" />
+      <span>微信昵称 </span>
+    </div>
+    <div class="h-start">
+      <div id="go-start" class="button">开始测试</div>
+    </div>
+    <div class="h-logo">
+      <img src="./image/htxt.png" />
+    </div>
+  </div>
+
+  <div class="container" id="questions" style="display: none">
+    <div class="q-title">
+      <span id="q-num"></span>
+      <span id="q-type"></span>
+    </div>
+    <div id="q-text"></div>
+    <div class="q-area">
+      <div id="q-q"></div>
+      <div class="q-op">
+        <div id="q-prev">上一题</div>
+        <div id="q-next"></div>
       </div>
     </div>
 
-    <div class="container" id="questions" style="display: none">
-      <div class="q-title">
-        <span id="q-num"></span>
-        <span id="q-type"></span>
-      </div>
-      <div id="q-text"></div>
-      <div class="q-area">
-        <div id="q-q"></div>
-        <div class="q-op">
-          <div id="q-prev">上一题</div>
-          <div id="q-next"></div>
-        </div>
-      </div>
-
-      <div class="q-s">
-        <div id="q-slider-in"></div>
-      </div>
-      <div class="q-curr">
-        <span id="curr"></span>/<span id="page-all"></span>
-      </div>
+    <div class="q-s">
+      <div id="q-slider-in"></div>
     </div>
-    <script>
-      /**
-       * 
-       * 3 单选
-        4 复选
-        6 textarea
-        7 label
-       **/
-      $("#go-start").click(() => {
-        $("#home").hide();
-        $("#questions").show();
+    <div class="q-curr">
+      <span id="curr"></span>/<span id="page-all"></span>
+    </div>
+  </div>
+  <script>
+    /**
+     * 
+     * 3 单选
+      4 复选
+      6 textarea
+      7 label
+     **/
+    $("#go-start").click(() => {
+      $("#home").hide();
+      $("#questions").show();
+    });
+
+    const answer = [];
+    let current = acurremt || 0;
+    const qs = data.subjects;
+
+    const aajax = (subjectId, answers, isOver, callback) => {
+      $.ajax({
+        url: "test.html",
+
+        data: { subjectId, answers, isOver },
+        success: function () {
+          callback && callback();
+        },
+        error: function () {
+          callback && callback(); // 以后删掉
+        },
       });
+    };
 
-      const answer = [];
-      let current = acurremt || 0;
-      const qs = data.subjects;
+    const contains = (arr = [], item) => {
+      if (!arr) return false;
+      return arr.indexOf(item) !== -1;
+    };
 
-      const aajax = (subjectId, answers, isOver, callback) => {
-        $.ajax({
-          url: "test.html",
-
-          data: { subjectId, answers, isOver },
-          success: function () {
-            callback && callback();
-          },
-          error: function () {
-            callback && callback(); // 以后删掉
-          },
-        });
-      };
-
-      const contains = (arr = [], item) => {
-        if (!arr) return false;
-        return arr.indexOf(item) !== -1;
-      };
-
-      String.prototype.gblen = function () {
-        var len = 0;
-        for (var i = 0; i < this.length; i++) {
-          if (this.charCodeAt(i) > 127 || this.charCodeAt(i) == 94) {
-            len += 2;
-          } else {
-            len++;
-          }
+    String.prototype.gblen = function () {
+      var len = 0;
+      for (var i = 0; i < this.length; i++) {
+        if (this.charCodeAt(i) > 127 || this.charCodeAt(i) == 94) {
+          len += 2;
+        } else {
+          len++;
         }
-        return len;
-      };
+      }
+      return len;
+    };
 
-      const isAvaliableNext = (item) => {
-        if (typeof item === "undefined") return false;
-        if (Array.isArray(item)) return item.length;
-        if (typeof item === "string") return item.length;
-        return true;
-      };
+    const isAvaliableNext = (item) => {
+      if (typeof item === "undefined") return false;
+      if (Array.isArray(item)) return item.length;
+      if (typeof item === "string") return item.length;
+      return true;
+    };
 
-      const rendreMultiLine = () => {
-        $(".sel-item .text").each(function () {
-          if ($(this).height() > 120) {
-            $(this).addClass("multi");
-          }
-        });
-      };
+    const rendreMultiLine = () => {
+      $(".sel-item .text").each(function () {
+        if ($(this).height() > 120) {
+          $(this).addClass("multi");
+        }
+      });
+    };
 
-      const renderQs = () => {
-        const q = qs[current];
-        let a = q.answers || [];
-        let ret = "";
-        if (q.type === 3 || q.type === 4) {
-          q.items.forEach((t, i) => {
-            const image = contains(a, t) ? "sel" : "unsel";
-            const cls = t.gblen() > 40 ? " multi " : "";
-            ret += `<div class="sel-item" idx="${t}">
+    const renderQs = () => {
+      const q = qs[current];
+      let a = q.answers || [];
+      let ret = "";
+      if (q.type === 3 || q.type === 4) {
+        q.items.forEach((t, i) => {
+          const image = contains(a, t) ? "sel" : "unsel";
+          const cls = t.gblen() > 40 ? " multi " : "";
+          ret += `<div class="sel-item" idx="${t}">
               <img src="./image/${image}.png" />
               <span class="text${cls}">${t}</span>
             </div>`;
-          });
-        }
-        if (q.type == 6) {
-          ret += `<div class="ipt-item">
-              <textarea type="text" placeholder="${
-                q.subjectTips || "请输入"
-              }">${(a && a[0]) || ""}</textarea>
+        });
+      }
+      if (q.type == 6) {
+        ret += `<div class="ipt-item">
+              <textarea type="text" placeholder="${q.subjectTips || "请输入"
+          }">${(a && a[0]) || ""}</textarea>
             </div>`;
-        }
+      }
 
-        if (q.type === 7) {
-          ret += '<div class="text-item">';
-          q.items.forEach((item, i) => {
-            const cls = contains(a, item) ? "sel " : "unsel ";
-            ret += `<div class="${cls}btn" idx="${item}">${item}</div>`;
+      if (q.type === 7) {
+        ret += '<div class="text-item">';
+        q.items.forEach((item, i) => {
+          const cls = contains(a, item) ? "sel " : "unsel ";
+          ret += `<div class="${cls}btn" idx="${item}">${item}</div>`;
+        });
+        ret += "</div>";
+      }
+
+      $("#q-q").html(ret);
+    };
+
+    const renderCurrent = () => {
+      const q = qs[current];
+      const a = q.answers || [];
+      $("#page-all").text(qs.length);
+      $("#q-num").text(current + 1); // 当前第几
+      $("#q-type").text(q.type_desc); // 题目类型
+      $("#q-text").text(q.subjectName); // 题目类型
+      $("#q-slider-in").width(((current + 1) * 100) / qs.length + "%");
+      $("#curr").text(current + 1);
+      // 第一题
+      if (!current) {
+        $("#q-prev").addClass("gray");
+      } else {
+        $("#q-prev").removeClass("gray");
+      }
+      if (typeof a === "undefined" || (Array.isArray(a) && !a.length)) {
+        $("#q-next").addClass("grayb");
+      } else {
+        $("#q-next").removeClass("grayb");
+      }
+      if (current + 1 === qs.length) {
+        $("#q-next").text("查看结果");
+      } else {
+        $("#q-next").text("下一题");
+      }
+      renderQs();
+      setTimeout(() => {
+        rendreMultiLine();
+      }, 1);
+    };
+
+    renderCurrent();
+
+    /** next **/
+    $("#q-next").click(() => {
+      const q = qs[current];
+      console.log("current answer: ", q.answers);
+      if (isAvaliableNext(q.answers)) {
+        if (current == qs.length - 1) {
+          aajax(q.subjectId, q.answers.join("@@@"), 1, () => {
+            window.location = "s.html";
           });
-          ret += "</div>";
-        }
-
-        $("#q-q").html(ret);
-      };
-
-      const renderCurrent = () => {
-        const q = qs[current];
-        const a = q.answers || [];
-        $("#page-all").text(qs.length);
-        $("#q-num").text(current + 1); // 当前第几
-        $("#q-type").text(q.type_desc); // 题目类型
-        $("#q-text").text(q.subjectName); // 题目类型
-        $("#q-slider-in").width(((current + 1) * 100) / qs.length + "%");
-        $("#curr").text(current + 1);
-        // 第一题
-        if (!current) {
-          $("#q-prev").addClass("gray");
         } else {
-          $("#q-prev").removeClass("gray");
+          aajax(q.subjectId, q.answers.join("@@@"), 1, () => {
+            current += 1;
+            renderCurrent();
+          });
         }
-        if (typeof a === "undefined" || (Array.isArray(a) && !a.length)) {
-          $("#q-next").addClass("grayb");
+      }
+    });
+
+    /** prev **/
+    $("#q-prev").click(() => {
+      if (current > 0) {
+        current -= 1;
+        renderCurrent();
+      }
+    });
+
+    /** 选 题 **/
+    $("#q-q").delegate(".sel-item", "click", function () {
+      const idx = $(this).attr("idx");
+      const q = qs[current];
+      let a = q.answers || [];
+      if (!a.length) {
+        a = [idx];
+        q.answers = a;
+        renderCurrent();
+        return;
+      }
+
+      if (q.type === 3) {
+        if (a[0] == idx) {
+          a = [];
         } else {
-          $("#q-next").removeClass("grayb");
-        }
-        if (current + 1 === qs.length) {
-          $("#q-next").text("查看结果");
-        } else {
-          $("#q-next").text("下一题");
-        }
-        renderQs();
-        setTimeout(() => {
-          rendreMultiLine();
-        }, 1);
-      };
-
-      renderCurrent();
-
-      /** next **/
-      $("#q-next").click(() => {
-        const q = qs[current];
-        console.log("current answer: ", q.answers);
-        if (isAvaliableNext(q.answers)) {
-          if (current == qs.length - 1) {
-            aajax(q.subjectId, q.answers.join("@@@"), 1, () => {
-              window.location = "s.html";
-            });
-          } else {
-            aajax(q.subjectId, q.answers.join("@@@"), 1, () => {
-              current += 1;
-              renderCurrent();
-            });
-          }
-        }
-      });
-
-      /** prev **/
-      $("#q-prev").click(() => {
-        if (current > 0) {
-          current -= 1;
-          renderCurrent();
-        }
-      });
-
-      /** 选 题 **/
-      $("#q-q").delegate(".sel-item", "click", function () {
-        const idx = $(this).attr("idx");
-        const q = qs[current];
-        let a = q.answers || [];
-        if (!a.length) {
           a = [idx];
-          q.answers = a;
-          renderCurrent();
-          return;
-        }
-
-        if (q.type === 3) {
-          if (a[0] == idx) {
-            a = [];
-          } else {
-            a = [idx];
-          }
-          q.answers = a;
-          renderCurrent();
-          return;
-        }
-
-        const aindex = a.indexOf(idx);
-        if (aindex > -1) {
-          a.splice(aindex, 1);
-        } else {
-          a.push(idx);
         }
         q.answers = a;
         renderCurrent();
-      });
+        return;
+      }
 
-      /** 输入框 **/
-      $("#q-q").delegate("textarea", "keyup", function () {
-        const v = $(this).val();
-        const q = qs[current];
-        if (v) {
-          q.answers = [v];
-        } else {
-          q.answers = [];
-        }
+      const aindex = a.indexOf(idx);
+      if (aindex > -1) {
+        a.splice(aindex, 1);
+      } else {
+        a.push(idx);
+      }
+      q.answers = a;
+      renderCurrent();
+    });
 
-        if (!v || v.length == 0) {
-          $("#q-next").addClass("grayb");
-        } else {
-          $("#q-next").removeClass("grayb");
-        }
-      });
+    /** 输入框 **/
+    $("#q-q").delegate("textarea", "keyup", function () {
+      const v = $(this).val();
+      const q = qs[current];
+      if (v) {
+        q.answers = [v];
+      } else {
+        q.answers = [];
+      }
 
-      // tag **/
-      $("#q-q").delegate(".btn", "click", function () {
-        const idx = $(this).attr("idx");
-        const q = qs[current];
-        q.answers = [idx];
-        renderCurrent();
-      });
-    </script>
-  </body>
+      if (!v || v.length == 0) {
+        $("#q-next").addClass("grayb");
+      } else {
+        $("#q-next").removeClass("grayb");
+      }
+    });
+
+    // tag **/
+    $("#q-q").delegate(".btn", "click", function () {
+      const idx = $(this).attr("idx");
+      const q = qs[current];
+      q.answers = [idx];
+      renderCurrent();
+    });
+  </script>
+</body>
+
 </html>

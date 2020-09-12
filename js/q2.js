@@ -23,7 +23,7 @@ const data = {
       items: ["苹果", "华为", "小米", "魅族"],
       subjectGroup: "未命名分组",
       subjectId: 4,
-      subjectName: "请选择你想要的手机",
+      subjectName: "孩子的学习动力不足，主动性差，需要家长和老师经常盯着才完成学习任务，感觉总是不情愿",
       subjectNum: 4,
       subjectScore: 8,
       subjectTips: "答题提示xxx",

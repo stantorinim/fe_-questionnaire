@@ -1,66 +1,67 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"
-      name="viewport"
-    />
-    <link rel="stylesheet" type="text/css" href="./image/common.css" />
-    <script src="./js/jq.js"></script>
-    <script src="./js/question.js"></script>
-  </head>
-  <body>
-    <div class="r-content" style="background: #f1f1f5; height: 100%">
-      <div class="r-title">《孩子学习动力评估量表》测试结果</div>
 
-      <div class="r-frm">
-        <div class="r-h">
-          <div class="r-avatar">
-            <img src="./image/sel.png" />
-            <span>微信昵称 </span>
-          </div>
-          <div class="r-score">
-            <span class="b">80</span>
-            <span>分</span>
-            <span class="r-gs">继续改善</span>
-          </div>
-        </div>
-        <!---->
-        <div class="r-line">
-          <img src="./image/line.png" />
-        </div>
-        <!-- -->
-        <div class="r-txt">
-          还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努...
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+  <link rel="stylesheet" type="text/css" href="./image/common.css" />
+  <script src="./js/jq.js"></script>
+  <script src="./js/question.js"></script>
+</head>
 
-        <!-- ---->
-        <div class="r-w">
-          <div class="rw-t">
-            获取深度解读<span class="rw-g">请加老师微信</span>
-          </div>
-          <div class="r-qr">
-            <img src="./image/qr.png" />
-          </div>
-          <div class="r-add">长按识别二维码添加老师</div>
+<body>
+  <div class="r-content" style="background: #f1f1f5; height: 100%">
+    <div class="r-title">《孩子学习动力评估量表》测试结果</div>
+
+    <div class="r-frm">
+      <div class="r-h">
+        <div class="r-avatar">
+          <img
+            src="http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEJwolWqCg30KbrYfiaic1ky1LiavZOxI2Hle1R4OumUcsGYWyTqF9BrYGOvfHFNhqnrDib4jZMxalFSCw/132" />
+          <span>微信昵称 </span>
         </div>
-        <!-- -->
-        <div class="r-share">分享朋友测试</div>
+        <div class="r-score">
+          <span class="b">80</span>
+          <span>分</span>
+          <span class="r-gs">继续改善</span>
+        </div>
       </div>
-    </div>
+      <!---->
+      <div class="r-line">
+        <img src="./image/line.png" />
+      </div>
+      <!-- -->
+      <div class="r-txt">
+        还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努...
+      </div>
 
-    <div id="mask">
-      <img src="./image/share.png" />
+      <!-- ---->
+      <div class="r-w">
+        <div class="rw-t">
+          获取深度解读<span class="rw-g">请加老师微信</span>
+        </div>
+        <div class="r-qr">
+          <img src="./image/qr.png" />
+        </div>
+        <div class="r-add">长按识别二维码添加老师</div>
+      </div>
+      <!-- -->
+      <div class="r-share">分享朋友测试</div>
     </div>
+  </div>
 
-    <script>
-      $(".r-share").click(() => {
-        $("#mask").show();
-      });
-      $("#mask").click(() => {
-        $("#mask").hide();
-      });
-    </script>
-  </body>
+  <div id="mask">
+    <img src="./image/share.png" />
+  </div>
+
+  <script>
+    $(".r-share").click(() => {
+      $("#mask").show();
+    });
+    $("#mask").click(() => {
+      $("#mask").hide();
+    });
+  </script>
+</body>
+
 </html>
