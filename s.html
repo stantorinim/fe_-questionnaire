@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="./image/common.css" />
+    <script src="./js/jq.js"></script>
+    <script src="./js/question.js"></script>
+  </head>
+  <body>
+    <div class="r-content" style="background: #f1f1f5; height: 100%">
+      <div class="r-title">《孩子学习动力评估量表》测试结果</div>
+      <div class="r-frm">
+        <div class="r-h">
+          <div class="r-avatar">
+            <img src="./image/sel.png" />
+            <span>微信昵称 </span>
+          </div>
+          <div class="r-score">
+            <span class="b">80</span>
+            <span>分</span>
+          </div>
+        </div>
+        <!-- -->
+        <div class="r-txt">
+          还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努...
+        </div>
+
+        <!-- ---->
+        <div class="r-w">
+          <div class="rw-t">
+            获取深度解读<span class="rw-g">请假老师微信</span>
+          </div>
+          <div class="r-qr">
+            <img src="./image/qr.png" />
+          </div>
+          <div class="r-add">长按识别二维码添加老师</div>
+        </div>
+        <!-- -->
+        <div class="r-share">分享朋友测试</div>
+      </div>
+    </div>
+
+    <div id="mask">
+      <img src="./image/share.png" />
+    </div>
+
+    <script>
+      $(".r-share").click(() => {
+        $("#mask").show();
+      });
+    </script>
+  </body>
+</html>
