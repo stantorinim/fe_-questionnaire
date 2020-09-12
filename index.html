@@ -8,7 +8,7 @@
     />
     <link rel="stylesheet" type="text/css" href="./image/common.css" />
     <script src="./js/jq.js"></script>
-    <script src="./js/question.js"></script>
+    <script src="./js/q2.js"></script>
     <script>
       const acurremt = 0; // 后端输入
     </script>
@@ -56,6 +56,13 @@
       </div>
     </div>
     <script>
+      /**
+       * 
+       * 3 单选
+        4 复选
+        6 textarea
+        7 label
+       **/
       $("#go-start").click(() => {
         $("#home").hide();
         $("#questions").show();
@@ -63,7 +70,7 @@
 
       const answer = [];
       let current = acurremt || 0;
-      const qs = questions;
+      const qs = data.subjects;
 
       const aajax = (subjectId, answers, isOver, callback) => {
         $.ajax({
@@ -103,13 +110,6 @@
         return true;
       };
 
-      const titleHach = {
-        4: "多选题",
-        5: "输入题",
-        3: "单选题",
-        6: "文本题",
-      };
-
       const rendreMultiLine = () => {
         $(".sel-item .text").each(function () {
           if ($(this).height() > 120) {
@@ -120,7 +120,7 @@
 
       const renderQs = () => {
         const q = qs[current];
-        const a = q.answers || [];
+        let a = q.answers || [];
         let ret = "";
         if (q.type === 3 || q.type === 4) {
           q.items.forEach((t, i) => {
@@ -132,15 +132,15 @@
             </div>`;
           });
         }
-        if (q.type == 5) {
+        if (q.type == 6) {
           ret += `<div class="ipt-item">
               <textarea type="text" placeholder="${
-                q.placeholder || "请输入"
+                q.subjectTips || "请输入"
               }">${(a && a[0]) || ""}</textarea>
             </div>`;
         }
 
-        if (q.type === 6) {
+        if (q.type === 7) {
           ret += '<div class="text-item">';
           q.items.forEach((item, i) => {
             const cls = contains(a, item) ? "sel " : "unsel ";
@@ -153,11 +153,11 @@
       };
 
       const renderCurrent = () => {
-        const q = questions[current];
-        const a = q.answers;
-        $("#page-all").text(questions.length);
+        const q = qs[current];
+        const a = q.answers || [];
+        $("#page-all").text(qs.length);
         $("#q-num").text(current + 1); // 当前第几
-        $("#q-type").text(titleHach[q.type]); // 题目类型
+        $("#q-type").text(q.type_desc); // 题目类型
         $("#q-text").text(q.subjectName); // 题目类型
         $("#q-slider-in").width(((current + 1) * 100) / qs.length + "%");
         $("#curr").text(current + 1);
@@ -190,7 +190,7 @@
         const q = qs[current];
         console.log("current answer: ", q.answers);
         if (isAvaliableNext(q.answers)) {
-          if (current == questions.length - 1) {
+          if (current == qs.length - 1) {
             aajax(q.subjectId, q.answers.join("@@@"), 1, () => {
               window.location = "s.html";
             });
@@ -215,8 +215,8 @@
       $("#q-q").delegate(".sel-item", "click", function () {
         const idx = $(this).attr("idx");
         const q = qs[current];
-        let a = q.answers;
-        if (!a) {
+        let a = q.answers || [];
+        if (!a.length) {
           a = [idx];
           q.answers = a;
           renderCurrent();
