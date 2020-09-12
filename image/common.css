@@ -199,10 +199,8 @@ body {
 
 .sel-item {
   display: flex;
-  height: 0.88rem;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 0.12rem;
 }
 .sel-item img {
   width: 0.48rem;
@@ -210,16 +208,22 @@ body {
 }
 
 .sel-item .text {
-  height: 0.88rem;
-  line-height: 0.88rem;
+  line-height: 0.4rem;
   font-size: 0.28rem;
   font-family: PingFangSC, PingFangSC-Regular;
   font-weight: 400;
   text-align: left;
   color: #1b1f26;
   flex: 1;
-  box-shadow: 0px 1px 0px 0px #e6e6ea;
+  padding: 0.2rem 0;
   margin-left: 0.32rem;
+  border-bottom: 1px solid #e6e6ea;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.sel-item .multi {
+  font-size: 0.28rem;
+  line-height: 0.4rem;
 }
 
 .ipt-item {
@@ -239,15 +243,18 @@ body {
 
 /** text ote, **/
 .text-item {
-  display: flex;
+  /* display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
+  padding-top: 0.2rem;
 }
 .text-item .btn {
-  padding: 0rem 0.4rem;
-  /* margin-right: 0.52rem; */
+  padding: 0rem 0.25rem;
+  float: left;
   margin-bottom: 0.32rem;
+  margin-left: 0.29rem;
+  margin-right: 0.29rem;
   color: #1b1f26;
   height: 0.63rem;
   line-height: 0.63rem;
