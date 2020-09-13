@@ -338,7 +338,7 @@ body {
 .r-txt {
   font-size: 0.24rem;
   font-weight: 400;
-  color: #feffff;
+  color: #7BFFC5;
   line-height: 0.33rem;
   margin-bottom: 0.49rem;
   padding: 0 0.36rem 0 0.36rem;
@@ -363,6 +363,7 @@ body {
 }
 .r-w .rw-g {
   color: #00bf80;
+  font-weight: 900;
 }
 
 .r-qr {

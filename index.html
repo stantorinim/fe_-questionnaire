@@ -15,9 +15,9 @@
 <body>
   <div class="container" id="home">
     <div class="home-b1">问卷</div>
-    <div class="h-title">孩子学习动力评估量表测评</div>
-    <div class="h-t1">共10题</div>
-    <div class="h-t2">
+    <div class="h-title" id="questionTitle"></div>
+    <div class="h-t1" id="questionAmount">共10题</div>
+    <div class="h-t2" id="questionDesc">
       简介简介简介简介简介简介简介简介简介简介简介简介简介
       简介简介，感谢您的支持
     </div>
@@ -56,6 +56,11 @@
     </div>
   </div>
   <script>
+    $("#questionTitle").text(data.name);
+    $("#questionDesc").text(data.description);
+    $("#questionAmount").text("共" + data.subjects.length + "题");
+
+
     /**
      * 
      * 3 单选
@@ -75,12 +80,13 @@
     const aajax = (subjectId, answers, isOver, callback) => {
       $.ajax({
         url: "/testPaper/v1.0.0/subject/submit",
+        type: "POST",
         data: { subjectId, answers, isOver },
-        success: function () {
-          callback && callback();
+        success: function (res) {
+          callback && callback(res);
         },
         error: function () {
-          callback && callback(); // 以后删掉
+          // callback && callback(res); // 以后删掉
         },
       });
     };
@@ -186,14 +192,16 @@
     /** next **/
     $("#q-next").click(() => {
       const q = qs[current];
-      console.log("current answer: ", q.answers);
+      const isOver = current == qs.length - 1 || q.isOver == 1 ? 1 : 0;
+      // console.log("current answer: ", q.answers);
       if (isAvaliableNext(q.answers)) {
         if (current == qs.length - 1) {
-          aajax(q.subjectId, q.answers.join("@@@"), 1, () => {
-            window.location = "result.html";
+          aajax(q.subjectId, q.answers.join("@@@"), isOver, (res) => {
+            //console.log(res);
+            window.location = "result";
           });
         } else {
-          aajax(q.subjectId, q.answers.join("@@@"), 1, () => {
+          aajax(q.subjectId, q.answers.join("@@@"), isOver, (res) => {
             current += 1;
             renderCurrent();
           });
@@ -221,7 +229,7 @@
         return;
       }
 
-      if (q.type === 3) {
+      if (q.type === 'RADIO') {
         if (a[0] == idx) {
           a = [];
         } else {
