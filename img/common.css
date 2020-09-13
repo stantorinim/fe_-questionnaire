@@ -7,11 +7,13 @@ body {
   padding: 0;
   margin: 0;
   height: 100%;
-  background-color: #048C67;
+  background-color: #048c67;
 }
 
 .container {
-  background-size: 100% 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   height: 100%;
   /* display: flex; */
   /* flex: 1; */
@@ -21,11 +23,9 @@ body {
   overflow: hidden;
 }
 
-
 #home {
   background-image: url("../img/back.png");
 }
-
 
 /** home **/
 .home-b1 {
@@ -209,7 +209,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top:0.22rem;
+  margin-top: 0.22rem;
 }
 .sel-item img {
   width: 0.48rem;
@@ -332,6 +332,15 @@ body {
   margin-left: 0.15rem;
 }
 
+.r-thank {
+  color: white;
+  line-height: 0.56rem;
+  font-size: 0.4rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 0.03rem;
+}
+
 .r-line {
   margin: 0.22rem 0.38rem 0.15rem;
   line-height: 0;
@@ -344,7 +353,7 @@ body {
 .r-txt {
   font-size: 0.24rem;
   font-weight: 400;
-  color: #7BFFC5;
+  color: #7bffc5;
   line-height: 0.33rem;
   margin-bottom: 0.49rem;
   padding: 0 0.36rem 0 0.36rem;
