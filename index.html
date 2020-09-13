@@ -190,7 +190,7 @@
       if (isAvaliableNext(q.answers)) {
         if (current == qs.length - 1) {
           aajax(q.subjectId, q.answers.join("@@@"), 1, () => {
-            window.location = "s.html";
+            window.location = "result.html";
           });
         } else {
           aajax(q.subjectId, q.answers.join("@@@"), 1, () => {
