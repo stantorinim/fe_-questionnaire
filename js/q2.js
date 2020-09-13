@@ -19,7 +19,7 @@ const data = {
       "subjectNum": 1,
       "subjectScore": 11,
       "subjectTips": "",
-      "type": 3,
+      "type": 'RADIO',
       "type_desc": "单选框"
     },
     {
@@ -37,7 +37,7 @@ const data = {
       "subjectNum": 2,
       "subjectScore": 11,
       "subjectTips": "",
-      "type": 3,
+      "type": 'RADIO',
       "type_desc": "单选框"
     },
     {
@@ -55,7 +55,7 @@ const data = {
       "subjectNum": 3,
       "subjectScore": 11,
       "subjectTips": "",
-      "type": 3,
+      "type": 'RADIO',
       "type_desc": "单选框"
     },
     {
@@ -73,7 +73,7 @@ const data = {
       "subjectNum": 4,
       "subjectScore": 12,
       "subjectTips": "",
-      "type": 3,
+      "type": 'RADIO',
       "type_desc": "单选框"
     },
     {
@@ -91,7 +91,7 @@ const data = {
       "subjectNum": 5,
       "subjectScore": 11,
       "subjectTips": "",
-      "type": 3,
+      "type": 'RADIO',
       "type_desc": "单选框"
     },
     {
@@ -109,7 +109,7 @@ const data = {
       "subjectNum": 6,
       "subjectScore": 11,
       "subjectTips": "",
-      "type": 3,
+      "type": 'RADIO',
       "type_desc": "单选框"
     },
     {
@@ -127,7 +127,7 @@ const data = {
       "subjectNum": 7,
       "subjectScore": 11,
       "subjectTips": "",
-      "type": 3,
+      "type": 'RADIO',
       "type_desc": "单选框"
     },
     {
@@ -145,7 +145,7 @@ const data = {
       "subjectNum": 8,
       "subjectScore": 11,
       "subjectTips": "",
-      "type": 3,
+      "type": 'RADIO',
       "type_desc": "单选框"
     },
     {
@@ -163,7 +163,7 @@ const data = {
       "subjectNum": 9,
       "subjectScore": 11,
       "subjectTips": "",
-      "type": 3,
+      "type": 'RADIO',
       "type_desc": "单选框"
     },
     {
@@ -176,7 +176,7 @@ const data = {
       "subjectNum": 10,
       "subjectScore": 0,
       "subjectTips": "",
-      "type": 6,
+      "type": 'TEXTAREA',
       "type_desc": "单选框"
     }
   ],

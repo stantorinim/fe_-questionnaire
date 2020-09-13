@@ -74,8 +74,7 @@
 
     const aajax = (subjectId, answers, isOver, callback) => {
       $.ajax({
-        url: "test.html",
-
+        url: "/testPaper/v1.0.0/subject/submit",
         data: { subjectId, answers, isOver },
         success: function () {
           callback && callback();
@@ -122,7 +121,7 @@
       const q = qs[current];
       let a = q.answers || [];
       let ret = "";
-      if (q.type === 3 || q.type === 4) {
+      if (q.type === 'RADIO' || q.type === 'CHECKBOX') {
         q.items.forEach((t, i) => {
           const image = contains(a, t) ? "sel" : "unsel";
           const cls = t.gblen() > 40 ? " multi " : "";
@@ -132,14 +131,14 @@
             </div>`;
         });
       }
-      if (q.type == 6) {
+      if (q.type == 'TEXTAREA') {
         ret += `<div class="ipt-item">
               <textarea type="text" placeholder="${q.subjectTips || "请输入"
           }">${(a && a[0]) || ""}</textarea>
             </div>`;
       }
 
-      if (q.type === 7) {
+      if (q.type === 'LABS') {
         ret += '<div class="text-item">';
         q.items.forEach((item, i) => {
           const cls = contains(a, item) ? "sel " : "unsel ";
