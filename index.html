@@ -15,12 +15,18 @@
 </head>
 
 <body>
+  <div id="h-txtlayer">
+    <div class="h-title questionTitle"></div>
+    <div class="questionDesc" id="questionDetail"></div>
+  </div>
   <div class="container" id="home">
     <div class="home-b1">问卷</div>
-    <div class="h-title" id="questionTitle"></div>
+    <div class="h-title questionTitle"></div>
     <div class="h-t1" id="questionAmount"></div>
-    <div class="h-t2" id="questionDesc">
-
+    <div class="h-t2 questionDesc" id="qtsmall"></div>
+    <div class="h-showmore" id="showmore">
+      <span>查看更多</span>
+      <img src="./img/arr.png" />
     </div>
     <div class="h-avatar">
       <img th:src="${user.avatar}" />
@@ -57,19 +63,23 @@
   </div>
   <script th:inline="javascript">
     // const data = [[${ paper }]];
-    console.log("===data====", data)
+    console.log("===data====", data);
 
-    $("#questionTitle").text(data.name);
-    $("#questionDesc").text(data.description);
+    $(".questionTitle").text(data.name);
+    $("#qtsmall").text(data.description);
+    $("#questionDetail").text(data.detail);
     $("#questionAmount").text("共" + data.subjects.length + "题");
+    if (!data.detail || data.detail == '') {
+      $("#showmore").hide();
+    }
 
     /**
-     *
-     * RADIO 单选
-      CHECKBOX 复选
-      TEXTAREA textarea
-      LABS label
-     **/
+ *
+ * RADIO 单选
+  CHECKBOX 复选
+  TEXTAREA textarea
+  LABS label
+ **/
     $("#go-start").click(() => {
       $("#home").hide();
       $("#questions").show();
@@ -79,10 +89,9 @@
     let current = acurremt || 0;
     const qs = data.subjects;
 
-
     const aajax = (subjectId, answers, isOver, callback) => {
       $.ajax({
-        url: "http://localhost/testPaper/v1.0.0/subject/submit",
+        url: "/testPaper/v1.0.0/subject/submit",
         method: "POST",
         data: { subjectId, answers, isOver },
         success: function (res) {
@@ -132,7 +141,7 @@
       const q = qs[current];
       let a = q.answers || [];
       let ret = "";
-      if (q.type === 'RADIO' || q.type === 'CHECKBOX') {
+      if (q.type === "RADIO" || q.type === "CHECKBOX") {
         q.items.forEach((t, i) => {
           const image = contains(a, t) ? "sel" : "unsel";
           const cls = t.gblen() > 40 ? " multi " : "";
@@ -142,14 +151,14 @@
             </div>`;
         });
       }
-      if (q.type == 'TEXTAREA') {
+      if (q.type == "TEXTAREA") {
         ret += `<div class="ipt-item">
               <textarea type="text" placeholder="${q.subjectTips || "请输入"
           }">${(a && a[0]) || ""}</textarea>
             </div>`;
       }
 
-      if (q.type === 'LABS') {
+      if (q.type === "LABS") {
         ret += '<div class="text-item">';
         q.items.forEach((item, i) => {
           const cls = contains(a, item) ? "sel " : "unsel ";
@@ -204,7 +213,7 @@
         if (current == qs.length - 1) {
           aajax(q.subjectId, q.answers.join("@@@"), isOver, (res) => {
             const score = res.data;
-            console.log("=====res====", res)
+            console.log("=====res====", res);
             window.location = "/testPaper/v1.0.0/result?score=" + score;
           });
         } else {
@@ -281,7 +290,17 @@
       q.answers = [idx];
       renderCurrent();
     });
+
+    $(".h-showmore").click(() => {
+      $("#h-txtlayer").show();
+    });
+
+    $("#h-txtlayer").click(() => {
+      $("#h-txtlayer").hide();
+    });
   </script>
 </body>
+
+</html>
 
 </html>
