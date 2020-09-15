@@ -62,8 +62,9 @@ body {
 }
 .h-avatar {
   display: flex;
+  position: fixed;
   align-items: center;
-  margin-top: 1.98rem;
+  bottom: 3.5rem;
 }
 .h-avatar img {
   width: 0.6rem;
