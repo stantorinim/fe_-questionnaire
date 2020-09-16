@@ -5,10 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
-  <link rel="stylesheet" type="text/css" href="./img/common.css" />
-  <script src="./js/jq.js"></script>
-  <script src="./js/q2.js"></script>
-
+  <link rel="stylesheet" type="text/css" href="/css/common.css?v=20200916" />
   <script>
     const acurremt = 0; // 后端输入
   </script>
@@ -16,17 +13,17 @@
 
 <body>
   <div id="h-txtlayer">
-    <div class="h-title questionTitle"></div>
-    <div class="questionDesc" id="questionDetail"></div>
+    <div class="h-title questionTitle" th:text="${paper.name}"></div>
+    <div class="questionDesc" th:text="${paper.fullDescription}"></div>
   </div>
   <div class="container" id="home">
     <div class="home-b1">问卷</div>
-    <div class="h-title questionTitle"></div>
-    <div class="h-t1" id="questionAmount"></div>
-    <div class="h-t2 questionDesc" id="qtsmall"></div>
-    <div class="h-showmore" id="showmore">
+    <div class="h-title questionTitle" th:text="${paper.name}"></div>
+    <div class="h-t1">共<span th:text="${paper.subjects.size()}"></span>题</div>
+    <div class="h-t2 questionDesc" th:utext="${paper.description}"></div>
+    <div class="h-showmore" th:unless="${#strings.isEmpty(paper.fullDescription)}">
       <span>查看更多</span>
-      <img src="./img/arr.png" />
+      <img src="/img/arr.png" />
     </div>
     <div class="h-avatar">
       <img th:src="${user.avatar}" />
@@ -36,7 +33,7 @@
       <div id="go-start" class="button">开始测试</div>
     </div>
     <div class="h-logo">
-      <img src="./img/htxt.png" />
+      <img src="/img/htxt.png" />
     </div>
   </div>
 
@@ -61,25 +58,28 @@
       <span id="curr"></span>/<span id="page-all"></span>
     </div>
   </div>
-  <script th:inline="javascript">
-    // const data = [[${ paper }]];
-    console.log("===data====", data);
-
-    $(".questionTitle").text(data.name);
-    $("#qtsmall").text(data.description);
-    $("#questionDetail").text(data.detail);
-    $("#questionAmount").text("共" + data.subjects.length + "题");
-    if (!data.detail || data.detail == '') {
-      $("#showmore").hide();
-    }
-
+  <script src="https://bj-facebank-sign.oss-cn-beijing.aliyuncs.com/zimu/js/course/jquery.min.js"></script>
+  <script src="https://bj-facebank-sign.oss-cn-beijing.aliyuncs.com/zimu/js/course/rootSize.js?v=0902"></script>
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+  <script src="https://bj-facebank-sign.oss-cn-beijing.aliyuncs.com/zimu/js/course/weChatShare.js"></script>
+  <script type="text/javascript" th:inline="javascript">
+    $(function () {
+      rootSize.browerUa();
+    });
+    var wechatShareLink = [[${ wechatShareLink }]];
+    var wechatShareTitle = [[${ wechatShareTitle }]];
+    var wechatShareDesc = [[${ wechatShareDesc }]];
+    var wechatShareImgUrl = "https://bj-facebank-sign.oss-cn-beijing.aliyuncs.com/zimu/wxshare.png";
+    var tid = [[${ tid }]];
+    const data = [[${ paper }]];
+    const paperId = [[${ paper.id }]];
     /**
- *
- * RADIO 单选
-  CHECKBOX 复选
-  TEXTAREA textarea
-  LABS label
- **/
+     *
+     * RADIO 单选
+      CHECKBOX 复选
+      TEXTAREA textarea
+      LABS label
+     **/
     $("#go-start").click(() => {
       $("#home").hide();
       $("#questions").show();
@@ -95,12 +95,10 @@
         method: "POST",
         data: { subjectId, answers, isOver },
         success: function (res) {
-          // console.log("==success==", res);
           callback && callback(res);
         },
         error: function (res) {
-          // console.log("==error==", res);
-          callback && callback(res); // 以后删掉
+          // callback && callback(res); // 以后删掉
         },
       });
     };
@@ -141,24 +139,23 @@
       const q = qs[current];
       let a = q.answers || [];
       let ret = "";
-      if (q.type === "RADIO" || q.type === "CHECKBOX") {
+      if (q.type === 'RADIO' || q.type === 'CHECKBOX') {
         q.items.forEach((t, i) => {
           const image = contains(a, t) ? "sel" : "unsel";
           const cls = t.gblen() > 40 ? " multi " : "";
           ret += `<div class="sel-item" idx="${t}">
-              <img src="./img/${image}.png" />
+              <img src="/img/${image}.png" />
               <span class="text${cls}">${t}</span>
             </div>`;
         });
       }
-      if (q.type == "TEXTAREA") {
+      if (q.type == 'TEXTAREA') {
         ret += `<div class="ipt-item">
-              <textarea type="text" placeholder="${q.subjectTips || "请输入"
-          }">${(a && a[0]) || ""}</textarea>
+              <textarea type="text" placeholder="${q.subjectTips || "请输入"}">${(a && a[0]) || ""}</textarea>
             </div>`;
       }
 
-      if (q.type === "LABS") {
+      if (q.type === 'LABS') {
         ret += '<div class="text-item">';
         q.items.forEach((item, i) => {
           const cls = contains(a, item) ? "sel " : "unsel ";
@@ -191,7 +188,7 @@
         $("#q-next").removeClass("grayb");
       }
       if (current + 1 === qs.length) {
-        $("#q-next").text("查看结果");
+        $("#q-next").text("提交");
       } else {
         $("#q-next").text("下一题");
       }
@@ -207,14 +204,10 @@
     $("#q-next").click(() => {
       const q = qs[current];
       const isOver = current == qs.length - 1 || q.isOver ? 1 : 0;
-      console.log("current answer: ", q.answers);
       if (isAvaliableNext(q.answers)) {
-        console.log("subjectId", q.subjectId);
         if (current == qs.length - 1) {
           aajax(q.subjectId, q.answers.join("@@@"), isOver, (res) => {
-            const score = res.data;
-            console.log("=====res====", res);
-            window.location = "/testPaper/v1.0.0/result?score=" + score;
+            window.location = "/testPaper/v1.0.0/result?paperId=" + paperId + "&tid=" + tid;
           });
         } else {
           aajax(q.subjectId, q.answers.join("@@@"), isOver, (res) => {
@@ -300,7 +293,5 @@
     });
   </script>
 </body>
-
-</html>
 
 </html>

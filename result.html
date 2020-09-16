@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <link rel="stylesheet" type="text/css" href="/css/common.css?v=20200916" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
-  <link rel="stylesheet" type="text/css" href="./img/common.css" />
-  <script src="./js/jq.js"></script>
-  <script src="./js/question.js"></script>
-</head>
+  <body>
+    <div class="r-content" style="background: #f1f1f5; height: 100%">
+      <div class="r-title"><span th:text="${paper.name}"></span> <span th:if="${paper.type == 10}">测试结果</span></div>
 
-<body>
-  <div class="r-content" style="background: #f1f1f5; height: 100%">
-    <div class="r-title">《孩子学习动力评估量表》测试结果</div>
-
-    <div class="r-frm">
-      <div class="r-h">
-        <div class="r-avatar">
-          <img
-            src="http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEJwolWqCg30KbrYfiaic1ky1LiavZOxI2Hle1R4OumUcsGYWyTqF9BrYGOvfHFNhqnrDib4jZMxalFSCw/132" />
-          <span>微信昵称 </span>
+      <div class="r-frm">
+        <div class="r-h">
+          <div class="r-avatar">
+            <img th:src="${user.avatar}" />
+            <span th:text="${user.nickName}"></span>
+          </div>
+           <div class="r-score" th:if="${paper.type == 10}">
+             <span class="b" th:text="${score}"></span> <span>分</span> <span class="r-gs" th:text="${comment.title}"></span>
+           </div>
         </div>
-        <!-- <div class="r-score">
-              <span class="b">80</span>
-              <span>分</span>
-              <span class="r-gs">继续改善</span>
-            </div> -->
-      </div>
-      <!---->
-      <div class="r-thank">感谢您积极参与支持</div>
-      <!---->
-      <div class="r-line">
-        <img src="./img/line.png" />
-      </div>
-      <!-- -->
-      <div class="r-txt">
-        还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努力还需努...
-      </div>
 
-      <!-- ---->
-      <div class="r-w">
-        <div class="rw-t">
-          获取深度解读<span class="rw-g">请加老师微信</span>
+        <div class="r-thank" th:if="${paper.type == 20}">感谢您积极参与支持</div>
+
+        <div class="r-line">
+          <img src="/img/line.png" />
         </div>
-        <div class="r-qr">
-          <img src="./img/qr.png" />
+
+        <div class="r-txt">
+          <span th:if="${paper.type == 10}" th:utext="${comment.comment}"></span>
+          <span th:if="${paper.type == 20}" th:text="${paper.recommend}"></span>
         </div>
-        <div class="r-add">长按识别二维码添加老师</div>
+
+        <div class="r-w">
+          <div class="rw-t">
+            <span th:if="${paper.type == 10}">获取深度解读</span><span th:if="${paper.type == 20}">更多意见反馈</span> <span class="rw-g">请加老师微信</span>
+          </div>
+          <div class="r-qr">
+            <img th:src="${qrImg}" />
+          </div>
+          <div class="r-add">长按识别二维码添加老师</div>
+        </div>
+        <!-- -->
+        <div class="r-share" th:if="${paper.type == 10}">分享朋友测试</div>
+        <div class="r-share" th:if="${paper.type == 20}">分享问卷</div>
       </div>
-      <!-- -->
-      <div class="r-share">分享朋友测试</div>
     </div>
-  </div>
 
-  <div id="mask">
-    <img src="./img/share.png" />
-  </div>
+    <div id="mask">
+      <img src="https://bj-facebank-sign.oss-cn-beijing.aliyuncs.com/zimu/img/course/share.png" />
+    </div>
 
-  <script>
-    $(".r-share").click(() => {
-      $("#mask").show();
-    });
-    $("#mask").click(() => {
-      $("#mask").hide();
-    });
-  </script>
-</body>
+    <script src="//bj-facebank-sign.oss-cn-beijing.aliyuncs.com/zimu/js/course/jquery.min.js"></script>
+    <script src="//bj-facebank-sign.oss-cn-beijing.aliyuncs.com/zimu/js/course/rootSize.js?v=0902"></script>
+    <script src="//res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="//bj-facebank-sign.oss-cn-beijing.aliyuncs.com/zimu/js/course/weChatShare.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+      $(function () {
+        rootSize.browerUa();
+      });
+      var wechatShareLink = [[${wechatShareLink}]];
+      var wechatShareTitle = [[${wechatShareTitle}]];
+      var wechatShareDesc = [[${wechatShareDesc}]];
+      var wechatShareImgUrl = "https://bj-facebank-sign.oss-cn-beijing.aliyuncs.com/zimu/wxshare.png";
 
-</html>
-
+      $(".r-share").click(() => {
+        $("#mask").show();
+      });
+      $("#mask").click(() => {
+        $("#mask").hide();
+      });
+    </script>
+  </body>
 </html>
